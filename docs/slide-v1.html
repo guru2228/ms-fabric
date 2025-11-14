@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optum Unified Data Strategy: The Case for Microsoft Fabric</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --optum-blue: #0066b2;
+            --optum-green: #00a94f;
+            --optum-gray: #4a4a4a;
+            --accent-red: #d32f2f;
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: var(--optum-blue);
+            font-weight: 600;
+        }
+        
+        .reveal .title-slide h1 {
+            font-size: 2.5em;
+            color: var(--optum-blue);
+        }
+        
+        .reveal .title-slide .subtitle {
+            color: var(--optum-gray);
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        
+        .reveal .chaos-badge {
+            background: var(--accent-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .reveal .pillar {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 10px 0;
+            border-left: 5px solid var(--optum-blue);
+            border-radius: 5px;
+        }
+        
+        .reveal .impact-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .reveal .mermaid {
+            font-size: 0.6em;
+        }
+        
+        .reveal table.comparison {
+            font-size: 0.5em;
+            border-collapse: collapse;
+        }
+        
+        .reveal table.comparison th {
+            background: var(--optum-blue);
+            color: white;
+            padding: 10px;
+        }
+        
+        .reveal table.comparison td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .reveal .win-box {
+            background: #d4edda;
+            border-left: 5px solid var(--optum-green);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .reveal .risk-highlight {
+            background: #f8d7da;
+            border-left: 5px solid var(--accent-red);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .reveal .phase-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .reveal .phase {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            margin: 0 5px;
+            background: var(--optum-blue);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+        
+        .reveal .cta-box {
+            background: var(--optum-blue);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .reveal .quote-large {
+            font-size: 1.5em;
+            font-style: italic;
+            color: var(--optum-blue);
+            margin: 30px 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Slide 1: Title -->
+            <section class="title-slide">
+                <h1>Optum Unified Data Strategy</h1>
+                <div class="subtitle">From Fragmented Chaos to Unified Governance</div>
+                <div style="margin-top: 50px;">
+                    <p style="font-size: 1.2em; color: var(--optum-gray);">
+                        <strong>The Strategic Case for Microsoft Fabric</strong>
+                    </p>
+                </div>
+                <div style="margin-top: 100px; font-size: 0.8em; color: #999;">
+                    Tech Strategy Presentation | Chief Data Office
+                </div>
+            </section>
+
+            <!-- Slide 2: The Current State -->
+            <section>
+                <h2>The Current State: <span style="color: var(--accent-red);">"The Wild West of Data"</span></h2>
+                <p style="font-size: 0.9em; margin-bottom: 30px;">Our operational reality across 7000+ tables and 9+ platforms</p>
+                
+                <div class="chaos-badge">Technical Debt Inventory</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.7em;">
+                    <div>
+                        <h3 style="color: var(--optum-blue);">Platforms (9+)</h3>
+                        <ul>
+                            <li>ECDH (Enterprise Clinical Data Hub)</li>
+                            <li>OCSP Facets</li>
+                            <li>CDP (Care Data Platform)</li>
+                            <li>OHBI (Optum Health BI)</li>
+                            <li>HEDIS Provsioning</li>
+                            <li>Cozeva, DataCore, DataRAP</li>
+                            <li>3 Operational Data Warehouses</li>
+                        </ul>
+                        
+                        <h3 style="color: var(--optum-blue);">Data Marts (4)</h3>
+                        <ul>
+                            <li>Healthcare Economies</li>
+                            <li>RADV/RAF</li>
+                            <li>Quality/Stars</li>
+                            <li>Ops & Provider Finance</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--optum-blue);">Tool Sprawl (8+)</h3>
+                        <ul>
+                            <li>Azure Data Factory</li>
+                            <li>Azure Databricks</li>
+                            <li>Snowflake</li>
+                            <li>dbt (scattered)</li>
+                            <li>Airflow & Airbyte</li>
+                            <li>Apache Kafka</li>
+                            <li>Great Expectations</li>
+                            <li>Custom Event Services</li>
+                        </ul>
+                        
+                        <h3 style="color: var(--optum-blue);">Critical Data Types</h3>
+                        <ul>
+                            <li>Patient/Member Demographics</li>
+                            <li>Practice Management</li>
+                            <li>Claims & Encounters</li>
+                            <li>Immunizations & Labs</li>
+                            <li>Eligibility & Enrollment</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: The Simple Data Movement Fallacy -->
+            <section>
+                <h2>The "Simple Data Movement" Fallacy</h2>
+                <p style="font-size: 0.8em;">What teams see vs. what the organization experiences</p>
+                
+                <div class="mermaid">
+                    flowchart TD
+                        A[Patient_123 enters via Kafka] --> B[PySpark Job<br/>Team A]
+                        B --> C[ECDH Bronze Layer]
+                        C --> D[ADF Pipeline<br/>Team B]
+                        D --> E[OCSP Facets Silver]
+                        E --> F[dbt Transform<br/>Team C]
+                        F --> G[DataRAP Gold]
+                        G --> H[Power BI Report]
+                        
+                        style A fill:#ff9,stroke:#333,stroke-width:2px
+                        style H fill:#9f9,stroke:#333,stroke-width:2px
+                </div>
+                
+                <div class="impact-box">
+                    <strong>Reality Check:</strong> When CMS audits RAF score accuracy or a provider disputes a quality rating, 
+                    <strong>we cannot prove data provenance across systems.</strong> This isn't theoretical—this is compliance risk.
+                </div>
+            </section>
+
+            <!-- Slide 4: Five Pillars of Chaos -->
+            <section>
+                <h2>The 5 Pillars of Organizational Chaos</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.65em; margin-top: 30px;">
+                    <div class="pillar">
+                        <h3>🗂️ 1. Metadata Fragmentation</h3>
+                        <p>Each team maintains metadata differently:</p>
+                        <ul>
+                            <li>Team A: DynamoDB + JSON</li>
+                            <li>Team B: ADF Monitor logs only</li>
+                            <li>Team C: Snowflake tags</li>
+                            <li>Team D: Confluence pages</li>
+                            <li>Team E: Excel spreadsheets</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pillar">
+                        <h3>🔀 2. Data Lineage Swamp</h3>
+                        <p>Lineage breaks at every handoff:</p>
+                        <ul>
+                            <li>Kafka → Databricks (tracked)</li>
+                            <li>Databricks → Snowflake (lost)</li>
+                            <li>Snowflake → dbt (rebuilt manually)</li>
+                            <li>dbt → Power BI (none)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pillar">
+                        <h3>🔐 3. Access Control Chaos</h3>
+                        <p>17+ security models to manage:</p>
+                        <ul>
+                            <li>Azure RBAC (ADF)</li>
+                            <li>Unity Catalog (Databricks)</li>
+                            <li>Snowflake Roles</li>
+                            <li>Kafka ACLs</li>
+                            <li>Power BI RLS (duplicated)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pillar">
+                        <h3>📚 4. Cataloging Graveyard</h3>
+                        <p>7000+ tables, 0 unified catalog:</p>
+                        <ul>
+                            <li>Data discovery: 60% of analyst time</li>
+                            <li>Duplicate datasets: 3-4x replication</li>
+                            <li>Purview: Partial, manual setup</li>
+                            <li>Result: Building blind</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pillar" style="grid-column: span 2;">
+                        <h3>⚙️ 5. Operational Overhead</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <p><strong>Skillset Fragmentation:</strong></p>
+                                <ul>
+                                    <li>Spark experts</li>
+                                    <li>Snowflake specialists</li>
+                                    <li>ADF developers</li>
+                                    <li>Kafka engineers</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p><strong>Support Burden:</strong></p>
+                                <ul>
+                                    <li>40% of 300 monthly tickets: "Where does this data come from?"</li>
+                                    <li>6-month onboarding time</li>
+                                    <li>30% cost overhead from duplication</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Why ADF+DB+SF Fails at Governance -->
+            <section>
+                <h2>Why ADF + Databricks + Snowflake Is <span style="color: var(--accent-red);">NOT</span> Enterprise Governance</h2>
+                <p style="font-size: 0.8em;">These are excellent execution engines but they create <strong>silos</strong></p>
+                
+                <table class="comparison">
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>ADF + DB + SF (Current)</th>
+                            <th>Fabric + Snowflake (Unified)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Unified Metadata</strong></td>
+                            <td>3 separate metastores + manual sync</td>
+                            <td style="background: #d4edda;">OneLake + Unity Catalog (native)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>End-to-End Lineage</strong></td>
+                            <td>Breaks at system boundaries</td>
+                            <td style="background: #d4edda;">Automatic, cross-workspace</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cataloging</strong></td>
+                            <td>Purview (optional, complex)</td>
+                            <td style="background: #d4edda;">Purview auto-integrated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Access Control</strong></td>
+                            <td>3 RBAC models + manual reconciliation</td>
+                            <td style="background: #d4edda;">Entra ID + Fabric RBAC (single pane)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Classification</strong></td>
+                            <td>Per-tool implementation</td>
+                            <td style="background: #d4edda;">Central policy, auto-propagated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compliance Audit</strong></td>
+                            <td>3 audit logs + manual correlation</td>
+                            <td style="background: #d4edda;">Single audit trail</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="impact-box" style="margin-top: 30px;">
+                    <strong>Key Insight:</strong> The choice isn't Fabric vs. ADF+DB+SF. It's <strong>"20 teams moving data efficiently but blindly, vs. one organization managing data intelligently."</strong>
+                </div>
+            </section>
+
+            <!-- Slide 6: Fabric Advantage - OneLake -->
+            <section>
+                <h2>The Fabric Advantage: <span style="color: var(--optum-green);">OneLake</span></h2>
+                <h3>Single Source of Truth (Not Another Data Lake)</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+                    <div>
+                        <h4 style="color: var(--optum-blue);">Current State:</h4>
+                        <div class="mermaid">
+                            graph TD
+                                A[Data in Snowflake] --> B[Copy to Power BI]
+                                C[Data in Databricks] --> D[Export to CSV]
+                                D --> B
+                                E[Data in ADLS] --> F[Load to DB]
+                                F --> B
+                                
+                                style B fill:#ff9,stroke:#333
+                                style D fill:#f99,stroke:#333
+                        </div>
+                        <p style="font-size: 0.7em; margin-top: 20px;">
+                            <strong>Problems:</strong> Data movement, stale copies, governance gaps
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: var(--optum-green);">Fabric State:</h4>
+                        <div class="mermaid">
+                            graph TD
+                                A[OneLake Parquet] --> B[Spark SQL]
+                                A --> C[Power BI Direct]
+                                A --> D[ML Models]
+                                A --> E[Python/R]
+                                
+                                style A fill:#9f9,stroke:#333,stroke-width:3px
+                        </div>
+                        <p style="font-size: 0.7em; margin-top: 20px;">
+                            <strong>Benefits:</strong> Store once, use everywhere. No copies. Live governance.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="win-box" style="margin-top: 30px;">
+                    <strong>Financial Impact:</strong> OneLake replaces 5 storage accounts, eliminating 40% replication costs (~$800K/year)
+                </div>
+            </section>
+
+            <!-- Slide 7: Fabric Advantage - Unified Governance -->
+            <section>
+                <h2>The Fabric Advantage: <span style="color: var(--optum-green);">Unified Metadata & Governance</span></h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div>
+                        <h3 style="color: var(--optum-blue);">Automatic Lineage Capture</h3>
+                        <div class="mermaid">
+                            flowchart LR
+                                subgraph "Fabric Pipeline"
+                                    A[Kafka Stream] --> B[Notebook]
+                                    B --> C[Lakehouse Table]
+                                end
+                                
+                                D[Lineage] -.-> A
+                                D -.-> B
+                                D -.-> C
+                                
+                                style D fill:#9f9,stroke:#333
+                        </div>
+                        <p style="font-size: 0.7em;">No manual code required. Lineage is captured natively.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--optum-blue);">Central Policy Management</h3>
+                        <div class="mermaid">
+                            flowchart TD
+                                A[Tag PHI in Source] --> B[Auto-Tag Downstream]
+                                A --> C[Propagate to Power BI]
+                                A --> D[Apply Access Controls]
+                                
+                                style A fill:#9f9,stroke:#333,stroke-width:2px
+                        </div>
+                        <p style="font-size: 0.7em;">Classify once, enforce everywhere.</p>
+                    </div>
+                </div>
+                
+                <div class="impact-box" style="margin-top: 30px;">
+                    <strong>CMS Audit Scenario:</strong> Generate full lineage report in <strong>10 minutes</strong> instead of 2 weeks.
+                </div>
+            </section>
+
+            <!-- Slide 8: Fabric + Snowflake -->
+            <section>
+                <h2>Fabric + Snowflake = <span style="color: var(--optum-green);">Best of Both Worlds</span></h2>
+                
+                <div class="mermaid" style="font-size: 0.7em;">
+                    graph TB
+                        subgraph "Microsoft Fabric"
+                            A[OneLake Governance Plane] --> B[Purview Catalog]
+                            A --> C[Unified Metadata]
+                            A --> D[Entra ID Access]
+                            A --> E[Power BI Service]
+                        end
+                        
+                        subgraph "Snowflake (Optimized Compute)"
+                            F[HEDIS/RADV Models]
+                            G[Complex Aggregations]
+                        end
+                        
+                        subgraph "Azure Databricks"
+                            H[Spark ML Jobs]
+                        end
+                        
+                        A -.->|Shortcuts| F
+                        A -.->|Connectors| H
+                        
+                        style A fill:#9f9,stroke:#333,stroke-width:3px
+                        style F fill:#bbf,stroke:#333
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div class="win-box">
+                        <h4>Keep Snowflake For:</h4>
+                        <ul style="font-size: 0.7em;">
+                            <li>Risk Adjustment compute isolation</li>
+                            <li>Complex HEDIS aggregations</li>
+                            <li>Existing optimized workloads</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="win-box">
+                        <h4>Use Fabric For:</h4>
+                        <ul style="font-size: 0.7em;">
+                            <li>Unified governance layer</li>
+                            <li>Cross-system metadata</li>
+                            <li>Power BI integration</li>
+                            <li>Data discovery & cataloging</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p style="font-size: 0.8em; margin-top: 20px;">
+                    <strong>No Rip-and-Replace:</strong> Fabric becomes the <strong>enterprise governance plane</strong> while Snowflake runs optimized workloads.
+                </p>
+            </section>
+
+            <!-- Slide 9: Healthcare-Specific Risk -->
+            <section>
+                <h2>Healthcare-Specific Risk: <span style="color: var(--accent-red);">CMS Interoperability Rule</span></h2>
+                <p style="font-size: 0.8em;">New Patient Access API requirements expose our governance gaps</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div class="risk-highlight">
+                        <h3>Current State Timeline</h3>
+                        <ul style="font-size: 0.7em;">
+                            <li><strong>Week 1-3:</strong> Manual identification of patient data across 9 warehouses</li>
+                            <li><strong>Week 4-6:</strong> Map lineage for consent management</li>
+                            <li><strong>Week 7-18:</strong> Implement access control in each system</li>
+                            <li><strong>Week 19-30:</strong> Build API from scratch</li>
+                            <li><strong>Ongoing:</strong> Manual audit trail correlation</li>
+                        </ul>
+                        <p style="font-size: 0.8em; color: var(--accent-red);">
+                            <strong>Total: 7+ months, $500K+ cost</strong>
+                        </p>
+                    </div>
+                    
+                    <div class="win-box">
+                        <h3>Fabric State Timeline</h3>
+                        <ul style="font-size: 0.7em;">
+                            <li><strong>Day 1:</strong> Search "patient" in Fabric catalog</li>
+                            <li><strong>Day 2:</strong> Auto-generate lineage</li>
+                            <li><strong>Week 1:</strong> Apply consent policy at OneLake level</li>
+                            <li><strong>Week 2:</strong> Use Data Activator to expose API</li>
+                            <li><strong>Ongoing:</strong> Native audit trail</li>
+                        </ul>
+                        <p style="font-size: 0.8em; color: var(--optum-green);">
+                            <strong>Total: 2 weeks, $50K cost</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="impact-box" style="margin-top: 30px;">
+                    <strong>Compliance Delay Cost:</strong> $500K/month in regulatory penalties if we miss CMS deadlines.
+                </div>
+            </section>
+
+            <!-- Slide 10: Phased Coexistence Strategy -->
+            <section>
+                <h2>Phased Coexistence Strategy</h2>
+                <p style="font-size: 0.8em;">Respecting existing investments while building governance</p>
+                
+                <div class="phase-timeline">
+                    <div class="phase">
+                        <strong>Phase 1<br/>Months 1-3</strong>
+                        <p style="font-size: 0.6em; margin-top: 10px;">Governance Layer</p>
+                    </div>
+                    <div class="phase">
+                        <strong>Phase 2<br/>Months 4-6</strong>
+                        <p style="font-size: 0.6em; margin-top: 10px;">Standardize Ingestion</p>
+                    </div>
+                    <div class="phase">
+                        <strong>Phase 3<br/>Months 7-12</strong>
+                        <p style="font-size: 0.6em; margin-top: 10px;">Workload Migration</p>
+                    </div>
+                    <div class="phase">
+                        <strong>Phase 4<br/>Year 2</strong>
+                        <p style="font-size: 0.6em; margin-top: 10px;">Optimization</p>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.65em; margin-top: 30px;">
+                    <div>
+                        <h4 style="color: var(--optum-blue);">Phase 1: Governance Hub (No Disruption)</h4>
+                        <ul>
+                            <li>Deploy Fabric as governance plane only</li>
+                            <li>Connect via shortcuts to Snowflake/DB</li>
+                            <li>Enable Purview scanning across all systems</li>
+                            <li><strong>Win:</strong> Single catalog without workload migration</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--optum-blue); mt-20">Phase 2: New Ingestion</h4>
+                        <ul>
+                            <li>Migrate new pipelines to Fabric Dataflows</li>
+                            <li>Keep existing ADF pipelines running</li>
+                            <li><strong>Win:</strong> All new data is automatically governed</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: var(--optum-blue);">Phase 3: Mart Migration</h4>
+                        <ul>
+                            <li>Move Power BI-centric marts to Fabric</li>
+                            <li>Keep Snowflake for HEDIS/RADF compute</li>
+                            <li><strong>Win:</strong> 60% query load off Snowflake</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--optum-blue); mt-20">Phase 4: Rationalization</h4>
+                        <ul>
+                            <li>Evaluate remaining Snowflake workloads</li>
+                            <li>Fabric as primary, Snowflake for HPC</li>
+                            <li><strong>Result:</strong> Governed, optimized estate</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: The Bottom Line -->
+            <section>
+                <h2>The Bottom Line: <span style="color: var(--accent-red);">The Risk of Inaction</span></h2>
+                
+                <div style="margin-top: 40px;">
+                    <table style="font-size: 0.6em; width: 100%;">
+                        <thead>
+                            <tr style="background: var(--optum-blue); color: white;">
+                                <th style="padding: 10px;">Question</th>
+                                <th style="padding: 10px;">CDO Current Stance</th>
+                                <th style="padding: 10px;">Reality Check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>"We have ADF+DB+SF"</strong></td>
+                                <td>Yes, but they're <strong>execution silos</strong></td>
+                                <td style="background: #ffd4d4;">Fabric is the <strong>governance glue</strong> they lack</td>
+                            </tr>
+                            <tr>
+                                <td><strong>"Teams are productive"</strong></td>
+                                <td>Yes, at <strong>local</strong> level</td>
+                                <td style="background: #ffd4d4;"><strong>Organizationally</strong>, we're blind and exposed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>"Let's not add tools"</strong></td>
+                                <td>We already have <strong>12+ tools</strong></td>
+                                <td style="background: #d4edda;">Fabric <strong>replaces</strong> 6-8 tools, not adds one</td>
+                            </tr>
+                            <tr>
+                                <td><strong>"Governance can be manual"</strong></td>
+                                <td>Until the <strong>first CMS audit fails</strong></td>
+                                <td style="background: #ffd4d4;">Automated governance is <strong>insurance</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="risk-highlight" style="margin-top: 30px;">
+                    <h3>Technical Debt Cost</h3>
+                    <p style="font-size: 1.2em;">
+                        Continuing current path will cost <strong>$3-5M</strong> to unwind in 2 years when CMS mandates real-time audit capabilities.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 12: 90-Day Pilot Proposal -->
+            <section>
+                <h2>Call to Action: <span style="color: var(--optum-green);">90-Day Governance Pilot</span></h2>
+                
+                <div class="cta-box">
+                    <h3>Scope: One Critical Path</h3>
+                    <p style="font-size: 0.9em;">Patient demographic flow from ECDH → RADV Mart</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                        <div>
+                            <h4>What We'll Measure:</h4>
+                            <ul style="font-size: 0.7em;">
+                                <li>⏱️ Time to generate lineage: <strong>2 weeks → 10 min</strong></li>
+                                <li>🔐 Access provisioning: <strong>5 requests → 1 request</strong></li>
+                                <li>📊 Audit compliance: <strong>Manual → Automated</strong></li>
+                                <li>🔍 Data discovery: <strong>Hours → Seconds</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Decision Point:</h4>
+                            <p style="font-size: 0.8em; background: rgba(255,255,255,0.2); padding: 15px; border-radius: 5px;">
+                                If we can't prove value in 90 days, I'll concede. <br/>
+                                If we can, we expand enterprise-wide.
+                            </p>
+                            
+                            <p style="font-size: 0.7em; margin-top: 20px;">
+                                <strong>Investment:</strong> $150K (3 engineers, 1 Fabric tenant)<br/>
+                                <strong>Risk:</strong> Minimal—no production workload migration
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-large">
+                    "Execution without governance is liability. <br/>
+                    Fabric gives us <strong>governed execution</strong>."
+                </div>
+            </section>
+
+            <!-- Slide 13: Summary -->
+            <section>
+                <h2>The Strategic Imperative</h2>
+                
+                <div style="background: var(--optum-blue); color: white; padding: 30px; border-radius: 10px; margin-top: 30px;">
+                    <h3 style="color: white;">We Don't Have a Tools Problem. We Have a <u>Systemic Governance Problem</u>.</h3>
+                    <ul style="font-size: 0.7em; margin-top: 20px;">
+                        <li>✅ ADF, Databricks, Snowflake = <strong>Excellent execution silos</strong></li>
+                        <li>❌ Missing = <strong>Unified metadata, lineage, access control, cataloging</strong></li>
+                        <li>🎯 Fabric provides the <strong>operating system</strong> to unify them</li>
+                        <li>💰 Cost of inaction: <strong>$3-5M technical debt + compliance risk</strong></li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3>Next Steps:</h3>
+                    <ol style="font-size: 0.8em;">
+                        <li><strong>Approve 90-day pilot</strong> (ECDHA → RADV lineage)</li>
+                        <li><strong>Assign 3-person tiger team</strong> (Data Eng + Governance + Architect)</li>
+                        <li><strong>Establish success criteria</strong> (time, cost, audit readiness metrics)</li>
+                        <li><strong>Review results</strong> at 90 days for go/no-go decision</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Slide 14: Q&A -->
+            <section>
+                <h1>Questions & Discussion</h1>
+                
+                <div style="margin-top: 50px; font-size: 0.8em;">
+                    <p><strong>Appendix Available On Request:</strong></p>
+                    <ul style="font-size: 0.8em; margin-top: 20px;">
+                        <li>Detailed ROI calculations ($1.2M/year savings potential)</li>
+                        <li>Technical architecture diagrams</li>
+                        <li>Risk register with mitigation strategies</li>
+                        <li>Team upskilling plan & timeline</li>
+                        <li>Vendor comparison analysis (Databricks vs. Fabric vs. Snowflake)</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 60px;">
+                    <p style="font-size: 0.9em; color: var(--optum-gray);">
+                        <i class="fas fa-envelope"></i> Tech Strategy Team <br/>
+                        <i class="fas fa-calendar"></i> Follow-up: 1 week from today
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'slide',
+            width: 1200,
+            height: 700,
+            
+            // Mermaid initialization
+            mermaid: {
+                theme: 'default',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            },
+            
+            // Initialize Mermaid
+            dependencies: [
+                {
+                    src: 'https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js',
+                    callback: function() {
+                        mermaid.initialize({ 
+                            startOnLoad: false,
+                            theme: 'base',
+                            themeVariables: {
+                                primaryColor: '#ffffff',
+                                primaryTextColor: '#333333',
+                                primaryBorderColor: '#0066b2',
+                                lineColor: '#666666'
+                            }
+                        });
+                    }
+                }
+            ]
+        });
+        
+        // Re-render Mermaid diagrams when slides change
+        Reveal.on('slidechanged', function(event) {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.init(undefined, event.currentSlide.querySelectorAll('.mermaid'));
+            }
+        });
+        
+        // Initial render
+        Reveal.on('ready', function(event) {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+        });
+    </script>
+</body>
+</html>
