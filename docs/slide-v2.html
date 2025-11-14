@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unified Data Strategy – Optum Health (Fabric + Snowflake)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --bg-alt: #ffffff;
+      --fg: #222222;
+      --muted: #666666;
+      --accent: #0066b3;
+      --accent-soft: #e2f0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 56px 80px 80px;
+      background: radial-gradient(circle at top left, #ffffff 0, #f6f7fb 55%);
+    }
+
+    .slide-inner {
+      max-width: 1100px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    p {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      max-width: 900px;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      font-size: 1.02rem;
+      max-width: 960px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .layout-two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 32px;
+      align-items: flex-start;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      font-size: 0.95rem;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      margin-top: 24px;
+    }
+
+    .footer span strong {
+      color: var(--accent);
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+      .slide {
+        padding: 32px 20px 56px;
+      }
+      .layout-two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="deck">
+  <!-- Slide 1: Title -->
+  <section class="slide active" data-index="0">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Unified Data Strategy & Governance</div>
+        <h1>Why Optum Health Needs<br />Microsoft Fabric + Snowflake</h1>
+        <p class="subtitle">
+          Moving from tool-by-tool pipelines to a unified data & governance fabric
+          for Risk, Quality, Finance, and Operations.
+        </p>
+        <p>
+          <strong>Presenter:</strong> Tech Strategist, Optum Health<br/>
+          <span class="hint">Use ← → or Space to navigate</span>
+        </p>
+      </div>
+      <div class="footer">
+        <span>Unified Data Strategy &bull; Optum Health</span>
+        <span>Slide 1 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Our challenge -->
+  <section class="slide" data-index="1">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Problem framing</div>
+        <h2>We don’t have a tooling problem.<br/>We have a control-plane problem.</h2>
+        <p>
+          From a single team’s view, ADF + Databricks + Snowflake “works.”
+          From an Optum Health view, we see something very different:
+        </p>
+        <ul>
+          <li>5+ RA/Quality warehouses & lakehouses: ECDH, OCSP Facets, CDP, OHBI, HEDIS, Cozeva, DataCore, DataRAP…</li>
+          <li>3+ operational warehouses and 4+ major data marts (Economics, RADV/RAF, Stars, Provider Incentives, Financials).</li>
+          <li>Dozens of inbound systems: PM, claims, encounters, labs, immunizations, eligibility, enrollment.</li>
+          <li>A zoo of tools: ADF, Databricks, Snowflake, dbt, Airflow, Airbyte, Great Expectations, Kafka, custom services.</li>
+        </ul>
+        <p>
+          Each team manages its <strong>own pipelines, metadata, lineage, and access model</strong>.
+        </p>
+      </div>
+      <div class="footer">
+        <span>Without a unified data control plane, everything is “custom.”</span>
+        <span>Slide 2 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Symptoms of fragmentation -->
+  <section class="slide" data-index="2">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Today’s reality</div>
+        <h2>Symptoms of a Fragmented Data Estate</h2>
+        <div class="layout-two-col">
+          <div>
+            <ul>
+              <li><strong>Inconsistent metadata & lineage</strong><br/>
+                Different tools, different patterns; lineage lives in code or PowerPoint.</li>
+              <li><strong>Scattered catalog & discovery</strong><br/>
+                No single RA/Quality catalog; multiple “truths” for member, provider, HCC, measures.</li>
+              <li><strong>Access control silos</strong><br/>
+                Snowflake roles, Databricks UC, ADF security, Kafka ACLs – no unified PHI policy.</li>
+              <li><strong>Duplicated logic</strong><br/>
+                Eligibility, enrollment, RAF logic re-implemented across warehouses and marts.</li>
+              <li><strong>Audit & compliance pain</strong><br/>
+                For CMS / RADV / Stars questions, lineage is reconstructed by chasing teams and reading notebooks.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Net effect</div>
+            <p>
+              Governance happens in <strong>spreadsheets and slideware</strong>,
+              not in the platform. Risk is high, reuse is low, and time-to-trust is slow.
+            </p>
+            <p class="quote">
+              “We standardized tools for pipelines, but never standardized
+              <strong>how we describe, govern, and share the data itself</strong>.”
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>Tools are standardized locally; governance is not standardized globally.</span>
+        <span>Slide 3 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Why ADF+DB+Snowflake alone isn't enough -->
+  <section class="slide" data-index="3">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Limitations at OH scale</div>
+        <h2>Why “ADF + Databricks + Snowflake”<br/>Isn’t Enough for Optum Health</h2>
+        <p>
+          That stack solves the problem: <em>“Let team X move data from source Y into warehouse Z.”</em><br/>
+          It does <strong>not</strong> solve: <em>“Unify RA, Quality, Finance, Ops & Provider data under shared governance.”</em>
+        </p>
+        <ul>
+          <li>No single place for end-to-end RA/Quality lineage (payer → ECDH → marts → reports).</li>
+          <li>No consistent RA/Quality domain model across ECDH, CDP, OHBI, HEDIS, Cozeva, DataRAP.</li>
+          <li>No centralized PHI/PII classification and policy that spans all engines.</li>
+          <li>Hard to rationalize duplicated marts and pipelines; hard to retire legacy flows.</li>
+          <li>Hard to answer regulators’ “show me exactly how you produced this RAF score” questions.</li>
+        </ul>
+      </div>
+      <div class="footer">
+        <span>We need a <strong>unified data control plane</strong>, not just more pipelines.</span>
+        <span>Slide 4 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: What Fabric brings -->
+  <section class="slide" data-index="4">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">What Fabric is</div>
+        <h2>Microsoft Fabric as the Unified Data Foundation</h2>
+        <div class="layout-two-col">
+          <div>
+            <ul>
+              <li><strong>OneLake</strong><br/>
+                A single logical data lake for OH; shared Delta/Parquet storage across engines.</li>
+              <li><strong>Fabric Data Factory</strong><br/>
+                Next-gen ADF, natively integrated with OneLake, workspaces, and CI/CD.</li>
+              <li><strong>Lakehouse & Warehouse</strong><br/>
+                Standardized Bronze/Silver/Gold layers for RA/Quality domains.</li>
+              <li><strong>Deep Purview integration</strong><br/>
+                Unified catalog, lineage, data classification, and sensitivity labels.</li>
+              <li><strong>Domain-aligned workspaces</strong><br/>
+                RA, Quality, Finance, Ops domains with ownership, endorsement, and certification.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-title">Fabric gives us</div>
+              <ul>
+                <li>One place to define RA/Quality entities and measures.</li>
+                <li>One lineage graph from sources to marts to Power BI.</li>
+                <li>One policy surface for PHI and access controls.</li>
+                <li>One data hub for discovery and certification.</li>
+              </ul>
+            </div>
+            <div class="badge-row">
+              <span class="badge">Control Plane</span>
+              <span class="badge">Governance</span>
+              <span class="badge">Domains</span>
+              <span class="badge">Lineage</span>
+              <span class="badge">Security & Compliance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>Fabric = unified data & governance fabric on top of our existing engines.</span>
+        <span>Slide 5 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Fabric + Snowflake together -->
+  <section class="slide" data-index="5">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Positioning</div>
+        <h2>Fabric + Snowflake: Control Plane + Compute Plane</h2>
+        <div class="layout-two-col">
+          <div class="card">
+            <div class="card-title">Fabric (Control Plane)</div>
+            <ul>
+              <li>OneLake as the shared, governed data foundation.</li>
+              <li>Fabric Data Factory to orchestrate domain pipelines.</li>
+              <li>Lakehouse / Warehouse as RA/Quality domain stores (Bronze/Silver/Gold).</li>
+              <li>Purview for catalog, lineage, classifications, and policies.</li>
+              <li>Domain workspaces for RA, Quality, Finance, Ops, Providers.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Snowflake (Compute Plane)</div>
+            <ul>
+              <li>High-performance analytic engine for curated Gold data.</li>
+              <li>Home for RA/RAF marts, Stars/Quality marts, Economics, Finance marts.</li>
+              <li>Consumes governed domain data from Fabric / OneLake.</li>
+              <li>Continues existing investment and skillset, but under a unified governance umbrella.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="quote">
+          We are <strong>not</strong> replacing Snowflake. We are making Fabric the
+          <strong>unified governance and data foundation</strong> that Snowflake (and others) plug into.
+        </p>
+      </div>
+      <div class="footer">
+        <span>Fabric governs. Snowflake computes. Both are strategic.</span>
+        <span>Slide 6 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: RA/Quality story today -->
+  <section class="slide" data-index="6">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Risk & Quality example</div>
+        <h2>Today’s RA / Quality Lineage Story</h2>
+        <p>
+          Example question: <em>“Show CMS how this member’s RAF score was produced.”</em>
+        </p>
+        <ul>
+          <li>Payer eligibility file lands in storage → ADF pipeline → Databricks transforms → loaded into ECDH.</li>
+          <li>From ECDH, custom jobs push slices into DataRAP, HEDIS provisioning, Cozeva, Stars, RAF/Economics marts, etc.</li>
+          <li>Each hop is implemented differently (dbt, notebooks, scripts), with its own “local” metadata.</li>
+          <li>Lineage is reconstructed manually by:
+            <ul>
+              <li>Chasing individual teams and SMEs.</li>
+              <li>Reading code, notebooks, and old diagrams.</li>
+              <li>Reconciling conflicting notions of “source of truth.”</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          This is slow, fragile, and risky for RA, RADV, and Stars audits.
+        </p>
+      </div>
+      <div class="footer">
+        <span>Our most regulated processes depend on ad-hoc lineage reconstruction.</span>
+        <span>Slide 7 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: RA/Quality story with Fabric -->
+  <section class="slide" data-index="7">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Future state</div>
+        <h2>RA / Quality with Fabric + Snowflake</h2>
+        <ul>
+          <li><strong>Step 1 – Ingest to OneLake</strong><br/>
+            All inbound payer, clinical, PM data land in OneLake (Bronze), orchestrated via Fabric Data Factory.</li>
+          <li><strong>Step 2 – Harmonize in RA/Quality domains</strong><br/>
+            RA/Quality logic lives in Fabric Lakehouse/Warehouse (Silver), with shared domain models.</li>
+          <li><strong>Step 3 – Curate and publish</strong><br/>
+            Curated Gold data products are:
+            <ul>
+              <li>Exposed inside Fabric for cross-domain use, and</li>
+              <li>Published into Snowflake RA/RAF and Stars marts for analytics.</li>
+            </ul>
+          </li>
+          <li><strong>Step 4 – Govern with Purview</strong><br/>
+            Purview shows end-to-end lineage, classifications, and access policies from source files to marts to reports.</li>
+          <li><strong>Step 5 – Audit-ready</strong><br/>
+            For a given member’s RAF score, we can open the lineage graph and show “source → transformations → controls → mart value.”</li>
+        </ul>
+        <p class="quote">
+          Regulators don’t care which ETL tool we used. They care that we can prove
+          <strong>complete, governed lineage</strong>. Fabric + Purview gives us that.
+        </p>
+      </div>
+      <div class="footer">
+        <span>Governance becomes an operational capability, not a manual exercise.</span>
+        <span>Slide 8 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 9: CDO objections -->
+  <section class="slide" data-index="8">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Addressing concerns</div>
+        <h2>Anticipating CDO Team Objections</h2>
+        <ul>
+          <li><strong>“We already standardized on ADF + Databricks + Snowflake.”</strong><br/>
+            Fabric includes the next-gen Data Factory and OneLake. We standardize <em>governance and data</em>, not just pipelines.</li>
+          <li><strong>“Fabric is just for Power BI.”</strong><br/>
+            Fabric is an end-to-end analytics platform: data movement, engineering, warehousing, real-time, and BI. Using it only for BI
+            leaves governance value on the floor.</li>
+          <li><strong>“This change is too big.”</strong><br/>
+            Proposal is phased:
+            <ul>
+              <li>Start with RA/Quality domains and new/modernized flows.</li>
+              <li>Register existing Snowflake/Databricks assets into the Fabric/Purview catalog.</li>
+              <li>Migrate strategic ADF pipelines into Fabric over time, not via big-bang.</li>
+            </ul>
+          </li>
+          <li><strong>“We’ll duplicate cost.”</strong><br/>
+            Fabric acts as the control plane; Snowflake and Databricks remain compute planes.
+            We redirect spend from fragmented tooling into a governed, shared backbone.</li>
+        </ul>
+      </div>
+      <div class="footer">
+        <span>The proposal is evolutionary, not revolutionary.</span>
+        <span>Slide 9 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: The ask -->
+  <section class="slide" data-index="9">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Decision</div>
+        <h2>What We’re Asking the CDO Team to Approve</h2>
+        <ul>
+          <li><strong>1. Recognize Fabric as the OH Unified Data Foundation</strong><br/>
+            Not just for Power BI – approve Fabric Data Factory, Lakehouse, and Warehouse for RA/Quality domains.</li>
+          <li><strong>2. Adopt Fabric + Purview as the standard governance plane</strong><br/>
+            All new RA/Quality data products, including those feeding Snowflake, must be cataloged and governed via Fabric + Purview.</li>
+          <li><strong>3. Define domain-aligned workspaces</strong><br/>
+            Establish RA, Quality, Finance, Ops, Provider domain workspaces in Fabric mapped to ECDH, CDP, OHBI, HEDIS, Cozeva, DataRAP, and related marts.</li>
+          <li><strong>4. Treat Snowflake as a strategic Gold-layer warehouse</strong><br/>
+            Continue to use Snowflake heavily, but with upstream data and policies unified in Fabric / OneLake.</li>
+        </ul>
+      </div>
+      <div class="footer">
+        <span>Approve Fabric as the <strong>governance fabric</strong> for Optum Health data.</span>
+        <span>Slide 10 / 11</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 11: Sound bites -->
+  <section class="slide" data-index="10">
+    <div class="slide-inner">
+      <div>
+        <div class="pill">Executive summary</div>
+        <h2>Key Messages to Leave in the Room</h2>
+        <ul>
+          <li>
+            <strong>“Our issue isn’t missing ETL tools.</strong>
+            Our issue is that Optum Health lacks a unified data & governance control plane.”</li>
+          <li>
+            <strong>“Fabric + Snowflake is not duplication.</strong>
+            Fabric is the control plane and unified data foundation; Snowflake (and Databricks) are compute planes.”</li>
+          <li>
+            <strong>“Today, our metadata lives in 10 tools and 20 slide decks.</strong>
+            With Fabric + Purview, governance becomes an operational capability, not a documentation exercise.”</li>
+          <li>
+            <strong>“For Risk Adjustment and Quality, regulators don’t care which ETL tool we used.</strong>
+            They care if we can show end-to-end, governed lineage. Fabric gives us that; ADF-only cannot.”</li>
+          <li>
+            <strong>“We preserve the CDO team’s investments.</strong>
+            We simply organize them under a unified, Microsoft-aligned, domain-driven foundation.”</li>
+        </ul>
+      </div>
+      <div class="footer">
+        <span>Thank you.</span>
+        <span>Slide 11 / 11</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    let index = 0;
+
+    function showSlide(i) {
+      if (i < 0 || i >= slides.length) return;
+      slides[index].classList.remove("active");
+      index = i;
+      slides[index].classList.add("active");
+    }
+
+    function next() {
+      if (index < slides.length - 1) showSlide(index + 1);
+    }
+
+    function prev() {
+      if (index > 0) showSlide(index - 1);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
+        e.preventDefault();
+        next();
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        e.preventDefault();
+        prev();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
